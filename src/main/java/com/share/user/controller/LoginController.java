@@ -1,5 +1,8 @@
 package com.share.user.controller;
 
+import com.share.enums.MessageEnum;
+import com.share.exception.UserException;
+import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +22,7 @@ import java.util.Map;
  */
 @RestController
 public class LoginController {
+    Logger logger = Logger.getLogger(LoginController.class);
     /**
      * 登录方法
      *
@@ -27,9 +31,10 @@ public class LoginController {
     @RequestMapping(value = "/login")
     public Map<String, Object> login() {
         String username = "admin";
-        String password = "1";
+        String password = "4dfg";
         boolean rememberMe = true;
         Map<String, Object> resultMap = new HashMap<String, Object>(1);
+
         try {
             UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberMe);
             SecurityUtils.getSubject().login(token);
@@ -37,7 +42,7 @@ public class LoginController {
             resultMap.put("message", "登录成功");
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("LoginController.login-->",e);
             resultMap.put("status", 500);
             resultMap.put("message", e.getMessage());
         }

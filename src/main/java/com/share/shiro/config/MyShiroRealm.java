@@ -1,5 +1,7 @@
 package com.share.shiro.config;
 
+import com.share.enums.MessageEnum;
+import com.share.exception.UserException;
 import com.share.shiro.vo.SysUser;
 import com.share.shiro.vo.SysPermission;
 import com.share.shiro.vo.SysRole;
@@ -8,6 +10,7 @@ import com.share.shiro.service.SysPermissionService;
 import com.share.shiro.service.SysRoleService;
 import com.share.shiro.service.SysUserService;
 import com.share.util.PasswordHelper;
+import org.apache.catalina.User;
 import org.apache.log4j.Logger;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -62,7 +65,9 @@ public class MyShiroRealm extends AuthorizingRealm {
     /*主要是用来进行身份认证的，也就是说验证用户输入的账号和密码是否正确。*/
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken)
-            throws AuthenticationException {
+            throws AuthenticationException{
+
+
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
         String name = token.getUsername();
         String password = String.valueOf(token.getPassword());
