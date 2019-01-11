@@ -1,0 +1,18 @@
+create user young identified by oracle123;
+grant unlimited tablespace to yonng;
+grant create table to yonng;
+grant drop any table to yonng;
+grant select any table to young;
+grant delete any table to young;
+grant update any table to young;
+grant insert any table to young;
+grant dba to young;
+grant select any dictionary to young;
+create user young_job identified by oracle123;
+grant create table to young_job;
+grant drop any table to young_job;
+grant select any table to young_job;
+grant delete any table to young_job;
+grant update any table to young_job;
+grant insert any table to young_job;
+grant dba to young_job;
