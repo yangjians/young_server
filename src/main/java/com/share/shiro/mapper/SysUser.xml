@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.shiro.dao.SysUserDao">
+    <select id="selectByMap" resultType="com.share.shiro.vo.SysUser" parameterType="Map">
+        select username ,password,to_char(state) status from young.user_info where username=#{username} and password=#{pswd}
+    </select>
+</mapper>

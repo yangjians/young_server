@@ -8,32 +8,32 @@
 -- runing in dedicated mode, so only consider the above as a hint ;-)
 --
 
-delete from qrtz_fired_triggers;
-delete from qrtz_simple_triggers;
-delete from qrtz_simprop_triggers;
-delete from qrtz_cron_triggers;
-delete from qrtz_blob_triggers;
-delete from qrtz_triggers;
-delete from qrtz_job_details;
-delete from qrtz_calendars;
-delete from qrtz_paused_trigger_grps;
-delete from qrtz_locks;
-delete from qrtz_scheduler_state;
+delete from young_job.qrtz_fired_triggers;
+delete from young_job.qrtz_simple_triggers;
+delete from young_job.qrtz_simprop_triggers;
+delete from young_job.qrtz_cron_triggers;
+delete from young_job.qrtz_blob_triggers;
+delete from young_job.qrtz_triggers;
+delete from young_job.qrtz_job_details;
+delete from young_job.qrtz_calendars;
+delete from young_job.qrtz_paused_trigger_grps;
+delete from young_job.qrtz_locks;
+delete from young_job.qrtz_scheduler_state;
 
-drop table qrtz_calendars;
-drop table qrtz_fired_triggers;
-drop table qrtz_blob_triggers;
-drop table qrtz_cron_triggers;
-drop table qrtz_simple_triggers;
-drop table qrtz_simprop_triggers;
-drop table qrtz_triggers;
-drop table qrtz_job_details;
-drop table qrtz_paused_trigger_grps;
-drop table qrtz_locks;
-drop table qrtz_scheduler_state;
+drop table young_job.qrtz_calendars;
+drop table young_job.qrtz_fired_triggers;
+drop table young_job.qrtz_blob_triggers;
+drop table young_job.qrtz_cron_triggers;
+drop table young_job.qrtz_simple_triggers;
+drop table young_job.qrtz_simprop_triggers;
+drop table young_job.qrtz_triggers;
+drop table young_job.qrtz_job_details;
+drop table young_job.qrtz_paused_trigger_grps;
+drop table young_job.qrtz_locks;
+drop table young_job.qrtz_scheduler_state;
 
 
-CREATE TABLE qrtz_job_details
+CREATE TABLE young_job.qrtz_job_details
   (
     SCHED_NAME VARCHAR2(120) NOT NULL,
     JOB_NAME  VARCHAR2(200) NOT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE qrtz_job_details
     JOB_DATA BLOB NULL,
     CONSTRAINT QRTZ_JOB_DETAILS_PK PRIMARY KEY (SCHED_NAME,JOB_NAME,JOB_GROUP)
 );
-CREATE TABLE qrtz_triggers
+CREATE TABLE young_job.qrtz_triggers
   (
     SCHED_NAME VARCHAR2(120) NOT NULL,
     TRIGGER_NAME VARCHAR2(200) NOT NULL,
@@ -69,7 +69,7 @@ CREATE TABLE qrtz_triggers
     CONSTRAINT QRTZ_TRIGGER_TO_JOBS_FK FOREIGN KEY (SCHED_NAME,JOB_NAME,JOB_GROUP) 
       REFERENCES QRTZ_JOB_DETAILS(SCHED_NAME,JOB_NAME,JOB_GROUP) 
 );
-CREATE TABLE qrtz_simple_triggers
+CREATE TABLE young_job.qrtz_simple_triggers
   (
     SCHED_NAME VARCHAR2(120) NOT NULL,
     TRIGGER_NAME VARCHAR2(200) NOT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE qrtz_simple_triggers
     CONSTRAINT QRTZ_SIMPLE_TRIG_TO_TRIG_FK FOREIGN KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP) 
 	REFERENCES QRTZ_TRIGGERS(SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP)
 );
-CREATE TABLE qrtz_cron_triggers
+CREATE TABLE young_job.qrtz_cron_triggers
   (
     SCHED_NAME VARCHAR2(120) NOT NULL,
     TRIGGER_NAME VARCHAR2(200) NOT NULL,
@@ -92,7 +92,7 @@ CREATE TABLE qrtz_cron_triggers
     CONSTRAINT QRTZ_CRON_TRIG_TO_TRIG_FK FOREIGN KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP) 
       REFERENCES QRTZ_TRIGGERS(SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP)
 );
-CREATE TABLE qrtz_simprop_triggers
+CREATE TABLE young_job.qrtz_simprop_triggers
   (          
     SCHED_NAME VARCHAR2(120) NOT NULL,
     TRIGGER_NAME VARCHAR2(200) NOT NULL,
@@ -112,7 +112,7 @@ CREATE TABLE qrtz_simprop_triggers
     CONSTRAINT QRTZ_SIMPROP_TRIG_TO_TRIG_FK FOREIGN KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP) 
       REFERENCES QRTZ_TRIGGERS(SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP)
 );
-CREATE TABLE qrtz_blob_triggers
+CREATE TABLE young_job.qrtz_blob_triggers
   (
     SCHED_NAME VARCHAR2(120) NOT NULL,
     TRIGGER_NAME VARCHAR2(200) NOT NULL,
@@ -122,20 +122,20 @@ CREATE TABLE qrtz_blob_triggers
     CONSTRAINT QRTZ_BLOB_TRIG_TO_TRIG_FK FOREIGN KEY (SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP) 
         REFERENCES QRTZ_TRIGGERS(SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP)
 );
-CREATE TABLE qrtz_calendars
+CREATE TABLE young_job.qrtz_calendars
   (
     SCHED_NAME VARCHAR2(120) NOT NULL,
     CALENDAR_NAME  VARCHAR2(200) NOT NULL, 
     CALENDAR BLOB NOT NULL,
     CONSTRAINT QRTZ_CALENDARS_PK PRIMARY KEY (SCHED_NAME,CALENDAR_NAME)
 );
-CREATE TABLE qrtz_paused_trigger_grps
+CREATE TABLE young_job.qrtz_paused_trigger_grps
   (
     SCHED_NAME VARCHAR2(120) NOT NULL,
     TRIGGER_GROUP  VARCHAR2(200) NOT NULL, 
     CONSTRAINT QRTZ_PAUSED_TRIG_GRPS_PK PRIMARY KEY (SCHED_NAME,TRIGGER_GROUP)
 );
-CREATE TABLE qrtz_fired_triggers 
+CREATE TABLE young_job.qrtz_fired_triggers
   (
     SCHED_NAME VARCHAR2(120) NOT NULL,
     ENTRY_ID VARCHAR2(95) NOT NULL,
@@ -152,7 +152,7 @@ CREATE TABLE qrtz_fired_triggers
     REQUESTS_RECOVERY VARCHAR2(1) NULL,
     CONSTRAINT QRTZ_FIRED_TRIGGER_PK PRIMARY KEY (SCHED_NAME,ENTRY_ID)
 );
-CREATE TABLE qrtz_scheduler_state 
+CREATE TABLE young_job.qrtz_scheduler_state
   (
     SCHED_NAME VARCHAR2(120) NOT NULL,
     INSTANCE_NAME VARCHAR2(200) NOT NULL,
@@ -160,7 +160,7 @@ CREATE TABLE qrtz_scheduler_state
     CHECKIN_INTERVAL NUMBER(13) NOT NULL,
     CONSTRAINT QRTZ_SCHEDULER_STATE_PK PRIMARY KEY (SCHED_NAME,INSTANCE_NAME)
 );
-CREATE TABLE qrtz_locks
+CREATE TABLE young_job.qrtz_locks
   (
     SCHED_NAME VARCHAR2(120) NOT NULL,
     LOCK_NAME  VARCHAR2(40) NOT NULL, 
