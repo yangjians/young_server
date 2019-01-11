@@ -20,7 +20,7 @@ import java.sql.SQLException;
 public class DruidConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(DruidConfig.class);
-
+//配置数据源
     private static final String DB_PREFIX = "spring.datasource";
 
     @Bean
